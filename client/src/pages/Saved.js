@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { ViewBtn, SaveBtn } from "../components/BookBtns";
 
 
-function Search() {
+function Saved() {
 
     return (
         <Container>
@@ -18,24 +18,7 @@ function Search() {
                 </Jumbotron>
             </Container>
             <Container pb mb border>
-                <h3 className="p-3">Book Search</h3>
-                <h6 className="p-3">Book</h6>
-                <form className="p-3">
-                    <Input
-                        onChange=""
-                        name="search"
-                        placeholder="Search for a book!"
-                    />
-                    <FormBtn
-                        disabled=""
-                        onClick=""
-                    >
-                        Search
-                    </FormBtn>
-                </form>
-            </Container>
-            <Container pb mb border>
-                <h3 className="p-3">Results</h3>
+                <h3 className="p-3">Saved Books</h3>
                 {/* {books.length ? (
                     <List>
                         {books.map(book => (
@@ -58,4 +41,4 @@ function Search() {
     )
 }
 
-export default Search;
+export default Saved;
