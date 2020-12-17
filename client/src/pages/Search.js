@@ -1,13 +1,39 @@
-import React from "react";
-import { Container } from "../components/Grid";
+import React, { useState, useEffect } from "react";
+import API from "../utils/API"
+import { Container, Row, Col } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import { Input, FormBtn } from "../components/Form";
+import { Card } from "../components/BookCard";
 import { List, ListItem } from "../components/List";
 import { Link } from "react-router-dom";
 import { ViewBtn, SaveBtn } from "../components/BookBtns";
 
 
 function Search() {
+
+    const [books, setBooks] = useState([]);
+
+    const [query, setQuery] = useState("");
+
+    useEffect(() => {
+        console.log(books)
+    }, [books]);
+
+    function handleInputChange({ target }) {
+        const { value } = target;
+        console.log(value);
+        setQuery(value);
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        API.searchBooks(query)
+            .then(res => {
+                console.log(res);
+                setBooks(...books, res.data.items)
+            })
+            .catch(err => console.log(err));
+    }
 
     return (
         <Container>
@@ -19,16 +45,15 @@ function Search() {
             </Container>
             <Container pb mb border>
                 <h3 className="p-3">Book Search</h3>
-                <h6 className="p-3">Book</h6>
                 <form className="p-3">
                     <Input
-                        onChange=""
+                        onChange={handleInputChange}
                         name="search"
                         placeholder="Search for a book!"
                     />
                     <FormBtn
                         disabled=""
-                        onClick=""
+                        onClick={handleFormSubmit}
                     >
                         Search
                     </FormBtn>
@@ -36,25 +61,29 @@ function Search() {
             </Container>
             <Container pb mb border>
                 <h3 className="p-3">Results</h3>
-                {/* {books.length ? (
-                    <List>
+                {books.length ? (
+                    <Row>
                         {books.map(book => (
-                            <ListItem key={book._id}>
-                                <Link to={"/books/" + book._id}>
-                                    <strong>
-                                        {book.title} by {book.author}
-                                    </strong>
-                                </Link>
-                                <ViewBtn onClick={() => viewBook(book._id)} />
-                                <SaveBtn onClick={() => saveBook(book._id)} />
-                            </ListItem>
+                            <Col size="4">
+                                <Card
+                                    key={book.id}
+                                    size="18"
+                                    image={book.volumeInfo.imageLinks.thumbnail}
+                                    title={book.volumeInfo.title}
+                                    author={book.volumeInfo.authors[0]}
+                                    description={book.volumeInfo.description}
+                                >
+                                </Card>
+                                <ViewBtn onClick={() => viewBook(book.id)} />
+                                <SaveBtn onClick={() => saveBook(book.id)} />
+                            </Col>
                         ))}
-                    </List>
+                    </Row>
                 ) : (
-                        <h3>No Results to Display</h3>
-                    )} */}
+                        <h5 className="text-center">No Results to Display...Yet</h5>
+                    )}
             </Container>
-        </Container>
+        </Container >
     )
 }
 

@@ -5,16 +5,16 @@ import "./style.css";
 // That way we don't have to define them all individually
 export function ViewBtn(props) {
     return (
-        <span className="view-btn" {...props} role="button" tabIndex="0">
+        <a href={props.link} className="view-btn" role="button" tabIndex="0">
             View
-        </span>
+        </a>
     );
 }
 
 export function SaveBtn(props) {
     return (
-        <span className="save-btn" {...props} role="button" tabIndex="0">
+        <a href="#" className="save-btn" role="button" tabIndex="0">
             Save
-        </span>
+        </a>
     );
 }
