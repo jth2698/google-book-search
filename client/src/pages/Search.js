@@ -3,10 +3,7 @@ import API from "../utils/API"
 import { Container, Row, Col } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import { Input, FormBtn } from "../components/Form";
-import { Card } from "../components/BookCard";
-import { List, ListItem } from "../components/List";
-import { Link } from "react-router-dom";
-import { ViewBtn, SaveBtn } from "../components/BookBtns";
+import MediaCard from "../components/MaterialCard"
 
 
 function Search() {
@@ -30,9 +27,20 @@ function Search() {
         API.searchBooks(query)
             .then(res => {
                 console.log(res);
-                setBooks(...books, res.data.items)
+                const qualifyingResults = res.data.items.filter(book =>
+                    book.volumeInfo.imageLinks !== undefined &&
+                    book.volumeInfo.title !== undefined &&
+                    book.volumeInfo.authors !== undefined &&
+                    book.volumeInfo.description !== undefined &&
+                    book.volumeInfo.previewLink !== undefined
+                );
+                setBooks(
+                    ...books,
+                    qualifyingResults
+                )
             })
             .catch(err => console.log(err));
+        setQuery("");
     }
 
     return (
@@ -59,23 +67,23 @@ function Search() {
                     </FormBtn>
                 </form>
             </Container>
-            <Container pb mb border>
+            <Container fluid pb mb border>
                 <h3 className="p-3">Results</h3>
                 {books.length ? (
                     <Row>
                         {books.map(book => (
                             <Col size="4">
-                                <Card
+                                <MediaCard
                                     key={book.id}
-                                    size="18"
                                     image={book.volumeInfo.imageLinks.thumbnail}
                                     title={book.volumeInfo.title}
                                     author={book.volumeInfo.authors[0]}
                                     description={book.volumeInfo.description}
+                                    link={book.volumeInfo.previewLink}
                                 >
-                                </Card>
-                                <ViewBtn onClick={() => viewBook(book.id)} />
-                                <SaveBtn onClick={() => saveBook(book.id)} />
+                                </MediaCard>
+                                {/* <ViewBtn onClick={() => viewBook(book.id)} />
+                                <SaveBtn onClick={() => saveBook(book.id)} /> */}
                             </Col>
                         ))}
                     </Row>
@@ -83,7 +91,7 @@ function Search() {
                         <h5 className="text-center">No Results to Display...Yet</h5>
                     )}
             </Container>
-        </Container >
+        </Container>
     )
 }
 
