@@ -8,7 +8,9 @@ import MediaCard from "../components/MaterialCard"
 
 function Search() {
 
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState([{
+        image: ""
+    }]);
 
     const [query, setQuery] = useState("");
 
@@ -34,10 +36,14 @@ function Search() {
                     book.volumeInfo.description !== undefined &&
                     book.volumeInfo.previewLink !== undefined
                 );
-                setBooks(
-                    ...books,
-                    qualifyingResults
-                )
+                qualifyingResults.forEach(result => {
+                    console.log(result);
+                    setBooks([
+                        ...books,
+                        { image: result.volumeInfo.imageLinks.thumbnail }
+                    ])
+
+                })
             })
             .catch(err => console.log(err));
         setQuery("");
@@ -75,11 +81,11 @@ function Search() {
                             <Col size="4">
                                 <MediaCard
                                     key={book.id}
-                                    image={book.volumeInfo.imageLinks.thumbnail}
-                                    title={book.volumeInfo.title}
-                                    author={book.volumeInfo.authors[0]}
-                                    description={book.volumeInfo.description}
-                                    link={book.volumeInfo.previewLink}
+                                // image={book.volumeInfo.imageLinks.thumbnail}
+                                // title={book.volumeInfo.title}
+                                // author={book.volumeInfo.authors[0]}
+                                // description={book.volumeInfo.description}
+                                // link={book.volumeInfo.previewLink}
                                 >
                                 </MediaCard>
                                 {/* <ViewBtn onClick={() => viewBook(book.id)} />
