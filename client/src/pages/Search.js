@@ -7,11 +7,12 @@ import { Input, FormBtn } from "../components/Form";
 import MaterialGrid from "../components/MaterialGrid";
 import { Grid } from "@material-ui/core/";
 import MaterialCard from "../components/MaterialCard";
+import { ViewBtn, SaveBtn } from "../components/MaterialBtns";
 
 const useStyles = makeStyles((theme) => ({
-    Grid: {
-        alignItems: "align-bottom"
-    }
+    // Grid: {
+    //     alignItems: "align-bottom"
+    // }
 }));
 
 function Search() {
@@ -108,12 +109,10 @@ function Search() {
                                         title={book.title}
                                         author={book.authors[0]}
                                         description={book.description}
-                                        link={book.previewLink}
-                                        onClick={(event) => { handleSave(event, book.id) }}
                                     >
                                     </MaterialCard>
-                                    {/* <ViewBtn onClick={() => viewBook(book.id)} />
-                                    <SaveBtn onClick={() => saveBook(book.id)} /> */}
+                                    <ViewBtn link={book.link}></ViewBtn>
+                                    <SaveBtn onClick={(event) => { handleSave(event, book.id) }}></SaveBtn>
                                 </Grid>
 
                             ))}

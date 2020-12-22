@@ -10,7 +10,7 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { PrimaryBtn, SecondaryBtn } from "../MaterialBtns";
+import { ViewBtn, SaveBtn } from "../MaterialBtns";
 
 const useStyles = makeStyles({
     root: {
@@ -78,10 +78,6 @@ export default function MaterialCard(props) {
                     </CardContent>
                 </Collapse>
             </CardActionArea>
-            <CardActions>
-                <PrimaryBtn link={props.link}></PrimaryBtn>
-                <SecondaryBtn onClick={props.onClick}></SecondaryBtn>
-            </CardActions>
         </Card>
     );
 }

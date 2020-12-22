@@ -10,18 +10,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export function PrimaryBtn({ link }) {
+export function ViewBtn({ link }) {
     return (
-        <Button href={link} variant="contained" color="primary" name="view">
-            View
+        <a href={link}>
+            <Button variant="contained" color="primary" name="view">
+                View
+        </Button>
+        </a>
+    );
+}
+
+export function SaveBtn({ onClick }) {
+    return (
+        <Button variant="contained" color="secondary" name="save" type="submit" onClick={onClick}>
+            Save
         </Button>
     );
 }
 
-export function SecondaryBtn({ onClick }) {
+export function DeleteBtn({ onClick }) {
     return (
-        <Button variant="contained" color="secondary" name="save" type="submit" onClick={onClick}>
-            Save
+        <Button variant="contained" color="secondary" name="delete" type="submit" onClick={onClick}>
+            Delete
         </Button>
     );
 }
