@@ -11,29 +11,45 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ViewBtn, SaveBtn } from "../MaterialBtns";
+import { green } from '@material-ui/core/colors';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
+        // display: 'flex',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(1),
+            // width: theme.spacing(75),
+            // height: theme.spacing(75),
+        },
         maxWidth: 345,
+        minHeight: 550,
         paddingBottom: 20,
-        marginBottom: 20,
+
     },
     card: {
-        minHeight: 280,
-        backgroundSize: "cover"
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
     },
     media: {
-        height: 300,
+        height: 400,
+        paddingTop: '56.25%', // 16:9
     },
-    body: {
-        alignSelf: "stretch",
-        textAlign: "center"
+    content: {
+        minHeight: 150,
     },
-    actions: {
-        // display: "flex",
-        justifyContent: "space-between"
-    },
-});
+    // cardActions: {
+    //     alignSelf: gutterBottom,
+    // },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    }
+}));
 
 export default function MaterialCard(props) {
     const classes = useStyles();
@@ -50,15 +66,18 @@ export default function MaterialCard(props) {
                     className={classes.media}
                     image={props.image}
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                <CardContent
+                    className={classes.content}>
+                    <Typography gutterBottom variant="h6" component="h6">
                         {props.title}
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="h4">
+                    <Typography gutterBottom variant="h6" component="h6">
                         {props.author}
                     </Typography>
                 </CardContent>
                 <CardActions>
+                    <ViewBtn link={props.link}></ViewBtn>
+                    <SaveBtn onClick={props.onClick}></SaveBtn>
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,

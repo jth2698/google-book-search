@@ -13,16 +13,16 @@ const useStyles = makeStyles((theme) => ({
 export function ViewBtn({ link }) {
     return (
         <a href={link}>
-            <Button variant="contained" color="primary" name="view">
+            {/* <Button size="small" name="view">
                 View
-        </Button>
+        </Button> */}
         </a>
     );
 }
 
 export function SaveBtn({ onClick }) {
     return (
-        <Button variant="contained" color="secondary" name="save" type="submit" onClick={onClick}>
+        <Button size="small" name="save" type="submit" onClick={onClick}>
             Save
         </Button>
     );
@@ -30,7 +30,7 @@ export function SaveBtn({ onClick }) {
 
 export function DeleteBtn({ onClick }) {
     return (
-        <Button variant="contained" color="secondary" name="delete" type="submit" onClick={onClick}>
+        <Button size="small" name="save" type="submit" onClick={onClick}>
             Delete
         </Button>
     );

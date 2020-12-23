@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import API from "../utils/API"
 import MaterialContainer from "../components/MaterialContainer"
 import Jumbotron from "../components/Jumbotron";
@@ -7,39 +6,31 @@ import { Input, FormBtn } from "../components/Form";
 import MaterialGrid from "../components/MaterialGrid";
 import { Grid } from "@material-ui/core/";
 import MaterialCard from "../components/MaterialCard";
-import { ViewBtn, SaveBtn } from "../components/MaterialBtns";
 
-const useStyles = makeStyles((theme) => ({
-    // Grid: {
-    //     alignItems: "align-bottom"
-    // }
-}));
 
 function Search() {
-
-    const classes = useStyles();
 
     const [books, setBooks] = useState([]);
 
     const [query, setQuery] = useState("");
 
     useEffect(() => {
-        console.log(books)
+        console.log(query);
+        console.log(books);
+        // (e) => handleSearch();
     }, [books]);
 
     function handleInputChange({ target }) {
         const { value } = target;
-        console.log(value);
         setQuery(value);
+        console.log(query);
     }
 
-    function handleSearch(event) {
-        event.preventDefault();
+    function handleSearch(e) {
+        e.preventDefault();
         API.searchBooks(query)
             .then(res => {
                 setBooks([]);
-                // console.log(books);
-                // console.log(res.data.items);
                 const qualifyingResults = res.data.items.filter(book =>
                     book.id !== undefined &&
                     book.volumeInfo.imageLinks !== undefined &&
@@ -49,7 +40,6 @@ function Search() {
                     book.volumeInfo.previewLink !== undefined
                 );
                 const newBooks = qualifyingResults.map(result => {
-                    console.log(result);
                     return ({
                         id: result.id,
                         image: result.volumeInfo.imageLinks.thumbnail,
@@ -59,7 +49,7 @@ function Search() {
                         link: result.volumeInfo.previewLink
                     })
                 });
-                setBooks([...books, ...newBooks])
+                setBooks([...newBooks])
             })
             .catch(err => console.log(err));
     }
@@ -74,57 +64,54 @@ function Search() {
     }
 
     return (
-        <div className={classes.root}>
+        <MaterialContainer>
             <MaterialContainer>
-                <MaterialContainer>
-                    <Jumbotron>
-                        <h1>(React) Google Books Search</h1>
-                        <h2>Search For and Save Books of Interest</h2>
-                    </Jumbotron>
-                </MaterialContainer>
-                <MaterialContainer>
-                    <h3 className="p-3">Book Search</h3>
-                    <form className="p-3">
-                        <Input
-                            onChange={handleInputChange}
-                            name="search"
-                            placeholder="Search for a book!"
-                        />
-                        <FormBtn
-                            onClick={handleSearch}
-                        >
-                            Search
-                        </FormBtn>
-                    </form>
-                </MaterialContainer>
-                <MaterialContainer>
-                    <h3 className="p-3">Results</h3>
-                    {books.length ? (
-                        <MaterialGrid>
-                            {books.map(book => (
-                                <Grid item xs={3}>
-                                    <MaterialCard
-                                        key={book.id}
-                                        image={book.image}
-                                        title={book.title}
-                                        author={book.authors[0]}
-                                        description={book.description}
-                                    >
-                                    </MaterialCard>
-                                    <ViewBtn link={book.link}></ViewBtn>
-                                    <SaveBtn onClick={(event) => { handleSave(event, book.id) }}></SaveBtn>
-                                </Grid>
-
-                            ))}
-                        </MaterialGrid>
-                    ) : (
-                            <h5 className="text-center">No Results to Display...Yet</h5>
-
-                        )}
-
-                </MaterialContainer>
+                <Jumbotron>
+                    <h1>(React) Google Books Search</h1>
+                    <h2>Search For and Save Books of Interest</h2>
+                </Jumbotron>
             </MaterialContainer>
-        </div>
+            <MaterialContainer>
+                <h3 className="p-3">Book Search</h3>
+                <form className="p-3">
+                    <Input
+                        onChange={handleInputChange}
+                        name="search"
+                        placeholder="Search for a book!"
+                    />
+                    <FormBtn
+                        onClick={(e) => handleSearch(e)}
+                    >
+                        Search
+                    </FormBtn>
+                </form>
+            </MaterialContainer>
+            <MaterialContainer>
+                <h3 className="p-3">Results</h3>
+                {books.length ? (
+                    <MaterialGrid>
+                        {books.map(book => (
+                            <Grid item xs={4} key={book.id}>
+                                <MaterialCard
+                                    image={book.image}
+                                    title={book.title}
+                                    author={book.authors[0]}
+                                    description={book.description}
+                                    link={book.link}
+                                    onClick={(e) => { handleSave(e, book.id) }}
+                                >
+                                </MaterialCard>
+                            </Grid>
+
+                        ))}
+                    </MaterialGrid>
+                ) : (
+                        <h5 className="text-center">No Results to Display...Yet</h5>
+
+                    )}
+
+            </MaterialContainer>
+        </MaterialContainer>
     )
 }
 

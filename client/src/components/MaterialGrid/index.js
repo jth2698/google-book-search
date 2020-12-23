@@ -4,9 +4,9 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
-        alignItems: "flex-bottom"
-        // alignContent: "center"
+        flexGrow: 0,
+        alignItems: "stretch",
+        alignContent: "center"
     }
 }));
 
