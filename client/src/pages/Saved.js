@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import API from "../utils/API"
-import MaterialContainer from "../components/MaterialContainer"
-import Jumbotron from "../components/Jumbotron";
-import { Input, FormBtn } from "../components/Form";
+import MaterialContainer from "../components/MaterialContainer";
 import MaterialGrid from "../components/MaterialGrid";
 import { Grid } from "@material-ui/core/";
 import MaterialCard from "../components/MaterialCard";
+import { DeleteBtn } from "../components/MaterialBtns";
 
 const useStyles = makeStyles((theme) => ({
     // Grid: {
@@ -30,6 +29,12 @@ function Saved() {
             .catch(err => console.log(err))
     };
 
+    function handleDelete(id) {
+        API.deleteBook(id)
+            .then(res => loadBooks())
+            .catch(err => console.log(err))
+    }
+
     return (
         <div className={classes.root}>
             <MaterialContainer>
@@ -44,9 +49,9 @@ function Saved() {
                                     title={book.title}
                                     author={book.authors[0]}
                                     description={book.description}
-                                    link={book.previewLink}
-                                    onClick={(event) => { handleSave(event, book.id) }}
                                 >
+                                    <DeleteBtn
+                                        onClick={() => handleDelete(book._id)}></DeleteBtn>
                                 </MaterialCard>
                             </Grid>
                         ))}

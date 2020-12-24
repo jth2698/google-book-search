@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme) => ({
 
 export function ViewBtn({ link }) {
     return (
-        <a href={link}>
-            {/* <Button size="small" name="view">
-                View
-        </Button> */}
-        </a>
+
+        <Button size="small" name="view" onClick={link}>
+            View
+        </Button>
+
     );
 }
 

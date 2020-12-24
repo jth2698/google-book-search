@@ -76,8 +76,7 @@ export default function MaterialCard(props) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <ViewBtn link={props.link}></ViewBtn>
-                    <SaveBtn onClick={props.onClick}></SaveBtn>
+                    {props.children}
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,

@@ -6,6 +6,7 @@ import { Input, FormBtn } from "../components/Form";
 import MaterialGrid from "../components/MaterialGrid";
 import { Grid } from "@material-ui/core/";
 import MaterialCard from "../components/MaterialCard";
+import { ViewBtn, SaveBtn } from "../components/MaterialBtns";
 
 
 function Search() {
@@ -96,10 +97,16 @@ function Search() {
                                     image={book.image}
                                     title={book.title}
                                     author={book.authors[0]}
-                                    description={book.description}
-                                    link={book.link}
-                                    onClick={(e) => { handleSave(e, book.id) }}
-                                >
+                                    description={book.description}>
+                                    <ViewBtn
+                                        onClick={book.link}>
+                                    </ViewBtn>
+                                    <SaveBtn
+                                        onClick={(e) => {
+                                            handleSave(e, book.id)
+                                        }}>
+                                    </SaveBtn>
+
                                 </MaterialCard>
                             </Grid>
 
