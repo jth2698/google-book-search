@@ -9,7 +9,6 @@ export default {
     },
     // Gets all books
     getBooks: function () {
-        console.log("API call to get books")
         return axios.get("/api/books");
     },
     // Gets the book with the given id
@@ -18,12 +17,10 @@ export default {
     },
     // Deletes the book with the given id
     deleteBook: function (id) {
-        console.log("API call to delete " + id);
         return axios.delete("/api/books/" + id);
     },
     // Saves a book to the database
     saveBook: function (bookData) {
-        console.log("API bookData: " + bookData)
         return axios.post("/api/books", bookData);
     }
 };

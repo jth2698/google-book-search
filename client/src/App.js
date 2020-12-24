@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Nav from "./components/Nav";
+import NavBar from "./components/NavBar";
 import Search from "./pages/Search";
-import Saved from "./pages/Saved"
+import Saved from "./pages/Saved";
 
 function App() {
     return (
         <BrowserRouter>
             <div>
-                <Nav />
+                <NavBar />
                 <Switch>
                     <Route exact path={["/", "/search"]}>
                         <Search />
