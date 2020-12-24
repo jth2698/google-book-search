@@ -1,6 +1,8 @@
+require('dotenv').config();
+
 import axios from "axios";
 const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
-const APIKEY = "&keyAIzaSyAKupb-SQk5upLX1icro95b12vwI0L_AGo";
+const APIKEY = `&key${process.env.API_KEY}`;
 
 export default {
     // Search GoogleBooks
