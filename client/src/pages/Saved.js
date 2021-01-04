@@ -53,9 +53,12 @@ function Saved() {
     const [books, setBooks] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
 
+    // In the saved books page, I use useEffect to call the loadbooks() function every time the page is loaded.
     useEffect(() => {
         loadBooks()
     }, []);
+
+    // The svaed book functions just make API to calls to either load books from the database or to delete books based on the book id
 
     function loadBooks() {
         API.getBooks()

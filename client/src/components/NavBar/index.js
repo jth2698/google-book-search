@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+// Because I am using Material UI, the only component I have is the Navbar. Other items (like the book cards) could also be components, but I left them in the applicable page for this project given that the scale was fairly small.  
+
 export default function NavBar() {
 
     const classes = useStyles();

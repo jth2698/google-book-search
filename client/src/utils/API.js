@@ -4,6 +4,8 @@ import axios from "axios";
 const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
 const APIKEY = `&key${process.env.API_KEY}`;
 
+// The API util consists of functions using axios to make calls to the Google Books API and mongo db
+
 export default {
     // Search GoogleBooks
     searchBooks: function (query) {

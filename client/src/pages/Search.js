@@ -58,14 +58,15 @@ function Search() {
     function handleInputChange({ target }) {
         const { value } = target;
         setQuery(value);
-        console.log(query);
     };
 
     function handleSearch(e) {
         e.preventDefault();
         API.searchBooks(query)
             .then(res => {
+                // Need to reset the books state as soon as a new search is returned. Otherwise, the new results are added on to the original results.
                 setBooks([]);
+                // The Google Books API can return titles, authors, etc. that are blank, so we filter the results to only include results with all the needed fields populated.
                 const qualifyingResults = res.data.items.filter(book =>
                     book.id !== undefined &&
                     book.volumeInfo.imageLinks !== undefined &&
@@ -91,6 +92,7 @@ function Search() {
 
     function handleSave(e, id) {
         e.preventDefault();
+        // To save a book, need to filter by id and then use the API util to save to the database.
         const dbBook = books.filter(book => book.id === id);
         API.saveBook(dbBook);
     };
@@ -100,6 +102,7 @@ function Search() {
     };
 
     return (
+        // Frontend is largely built with Material UI.
         <Container>
             {/* Hero unit */}
             <div className={classes.heroContent}>
@@ -136,6 +139,7 @@ function Search() {
                 {/* End hero unit */}
                 {books.length ? (
                     <Grid container spacing={4}>
+                        {/* Book results are populated in cards laid out in a Material UI grid */}
                         {books.map((book) => (
                             <Grid item key={book.id} xs={12} sm={6} md={4}>
                                 <Card className={classes.card}>
