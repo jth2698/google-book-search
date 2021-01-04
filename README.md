@@ -2,6 +2,8 @@
 
 # Google Books React Search
 
+![screenshot of deployed app](screenshot-deployed.jpg)
+
 ## Project Description
 
 This deployed web app is built with React JS and leverages the Google Books API  to allow the user to query, populate, save, and delete books.
@@ -19,7 +21,7 @@ This deployed web app is built with React JS and leverages the Google Books API 
 
 ## Installation Instructions
 
-If you are interested in using the Google Books React Search app, the [repo](https://github.com/jth2698/google-book-search) can be cloned.  Or, users can test the [deployed Employee Directory app]().
+If you are interested in using the Google Books React Search app, the [repo](https://github.com/jth2698/google-book-search) can be cloned.  Or, users can test the [deployed Employee Directory app](https://gentle-anchorage-47354.herokuapp.com/search).
 
 ## Usage 
 
